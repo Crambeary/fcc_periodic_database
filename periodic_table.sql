@@ -2,13 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.0
--- Dumped by pg_dump version 17.0
+-- Dumped from database version 12.17 (Ubuntu 12.17-1.pgdg22.04+1)
+-- Dumped by pg_dump version 12.17 (Ubuntu 12.17-1.pgdg22.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -17,22 +16,21 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
--- DROP DATABASE periodic_table;
+DROP DATABASE periodic_table;
 --
--- Name: periodic_table; Type: DATABASE; Schema: -; Owner: marct
+-- Name: periodic_table; Type: DATABASE; Schema: -; Owner: freecodecamp
 --
 
--- CREATE DATABASE periodic_table WITH TEMPLATE = template0 ENCODING = 'WIN1252' LOCALE_PROVIDER = libc LOCALE = 'English_United States.1252';
+CREATE DATABASE periodic_table WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
 
 
--- ALTER DATABASE periodic_table OWNER TO marct;
+ALTER DATABASE periodic_table OWNER TO freecodecamp;
 
 \connect periodic_table
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -46,7 +44,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: elements; Type: TABLE; Schema: public; Owner: marct
+-- Name: elements; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.elements (
@@ -56,25 +54,25 @@ CREATE TABLE public.elements (
 );
 
 
-ALTER TABLE public.elements OWNER TO marct;
+ALTER TABLE public.elements OWNER TO freecodecamp;
 
 --
--- Name: properties; Type: TABLE; Schema: public; Owner: marct
+-- Name: properties; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.properties (
     atomic_number integer NOT NULL,
-    atomic_mass numeric(9,6) NOT NULL,
+    atomic_mass numeric NOT NULL,
     melting_point_celsius numeric NOT NULL,
     boiling_point_celsius numeric NOT NULL,
     type_id integer NOT NULL
 );
 
 
-ALTER TABLE public.properties OWNER TO marct;
+ALTER TABLE public.properties OWNER TO freecodecamp;
 
 --
--- Name: types; Type: TABLE; Schema: public; Owner: marct
+-- Name: types; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.types (
@@ -83,10 +81,10 @@ CREATE TABLE public.types (
 );
 
 
-ALTER TABLE public.types OWNER TO marct;
+ALTER TABLE public.types OWNER TO freecodecamp;
 
 --
--- Name: types_type_id_seq; Type: SEQUENCE; Schema: public; Owner: marct
+-- Name: types_type_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
 --
 
 CREATE SEQUENCE public.types_type_id_seq
@@ -98,24 +96,24 @@ CREATE SEQUENCE public.types_type_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.types_type_id_seq OWNER TO marct;
+ALTER TABLE public.types_type_id_seq OWNER TO freecodecamp;
 
 --
--- Name: types_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: marct
+-- Name: types_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
 --
 
 ALTER SEQUENCE public.types_type_id_seq OWNED BY public.types.type_id;
 
 
 --
--- Name: types type_id; Type: DEFAULT; Schema: public; Owner: marct
+-- Name: types type_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.types ALTER COLUMN type_id SET DEFAULT nextval('public.types_type_id_seq'::regclass);
 
 
 --
--- Data for Name: elements; Type: TABLE DATA; Schema: public; Owner: marct
+-- Data for Name: elements; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
 INSERT INTO public.elements VALUES (1, 'H', 'Hydrogen');
@@ -131,23 +129,23 @@ INSERT INTO public.elements VALUES (10, 'Ne', 'Neon');
 
 
 --
--- Data for Name: properties; Type: TABLE DATA; Schema: public; Owner: marct
+-- Data for Name: properties; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.properties VALUES (1, 1.008000, -259.1, -252.9, 1);
-INSERT INTO public.properties VALUES (2, 4.002600, -272.2, -269, 1);
-INSERT INTO public.properties VALUES (6, 12.011000, 3550, 4027, 1);
-INSERT INTO public.properties VALUES (7, 14.007000, -210.1, -195.8, 1);
-INSERT INTO public.properties VALUES (8, 15.999000, -218, -183, 1);
-INSERT INTO public.properties VALUES (3, 6.940000, 180.54, 1342, 2);
-INSERT INTO public.properties VALUES (4, 9.012200, 1287, 2470, 2);
-INSERT INTO public.properties VALUES (5, 10.810000, 2075, 4000, 3);
-INSERT INTO public.properties VALUES (9, 18.998000, -220, -188.1, 2);
-INSERT INTO public.properties VALUES (10, 20.180000, -248.6, -246.1, 2);
+INSERT INTO public.properties VALUES (1, 1.008, -259.1, -252.9, 1);
+INSERT INTO public.properties VALUES (2, 4.0026, -272.2, -269, 1);
+INSERT INTO public.properties VALUES (3, 6.94, 180.54, 1342, 2);
+INSERT INTO public.properties VALUES (4, 9.0122, 1287, 2470, 2);
+INSERT INTO public.properties VALUES (5, 10.81, 2075, 4000, 3);
+INSERT INTO public.properties VALUES (6, 12.011, 3550, 4027, 1);
+INSERT INTO public.properties VALUES (7, 14.007, -210.1, -195.8, 1);
+INSERT INTO public.properties VALUES (8, 15.999, -218, -183, 1);
+INSERT INTO public.properties VALUES (9, 18.998, -220, -188.1, 1);
+INSERT INTO public.properties VALUES (10, 20.18, -248.6, -246.1, 1);
 
 
 --
--- Data for Name: types; Type: TABLE DATA; Schema: public; Owner: marct
+-- Data for Name: types; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
 INSERT INTO public.types VALUES (1, 'nonmetal');
@@ -156,14 +154,14 @@ INSERT INTO public.types VALUES (3, 'metalloid');
 
 
 --
--- Name: types_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: marct
+-- Name: types_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
 SELECT pg_catalog.setval('public.types_type_id_seq', 3, true);
 
 
 --
--- Name: elements elements_atomic_number_key; Type: CONSTRAINT; Schema: public; Owner: marct
+-- Name: elements elements_atomic_number_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.elements
@@ -171,7 +169,7 @@ ALTER TABLE ONLY public.elements
 
 
 --
--- Name: elements elements_name_key; Type: CONSTRAINT; Schema: public; Owner: marct
+-- Name: elements elements_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.elements
@@ -179,7 +177,7 @@ ALTER TABLE ONLY public.elements
 
 
 --
--- Name: elements elements_pkey; Type: CONSTRAINT; Schema: public; Owner: marct
+-- Name: elements elements_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.elements
@@ -187,7 +185,7 @@ ALTER TABLE ONLY public.elements
 
 
 --
--- Name: elements elements_symbol_key; Type: CONSTRAINT; Schema: public; Owner: marct
+-- Name: elements elements_symbol_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.elements
@@ -195,7 +193,7 @@ ALTER TABLE ONLY public.elements
 
 
 --
--- Name: properties properties_atomic_number_key; Type: CONSTRAINT; Schema: public; Owner: marct
+-- Name: properties properties_atomic_number_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.properties
@@ -203,7 +201,7 @@ ALTER TABLE ONLY public.properties
 
 
 --
--- Name: properties properties_pkey; Type: CONSTRAINT; Schema: public; Owner: marct
+-- Name: properties properties_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.properties
@@ -211,7 +209,7 @@ ALTER TABLE ONLY public.properties
 
 
 --
--- Name: types types_pkey; Type: CONSTRAINT; Schema: public; Owner: marct
+-- Name: types types_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.types
@@ -219,7 +217,7 @@ ALTER TABLE ONLY public.types
 
 
 --
--- Name: properties properties_atomic_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: marct
+-- Name: properties properties_atomic_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.properties
@@ -227,7 +225,7 @@ ALTER TABLE ONLY public.properties
 
 
 --
--- Name: properties properties_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: marct
+-- Name: properties properties_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.properties
